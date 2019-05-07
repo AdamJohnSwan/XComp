@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Bomb.gd" type="Script" id=1]
+[ext_resource path="res://Explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Arrow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/images/bombs/bomb.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/Retro_8-Bit_Game-Bomb_Explosion_06.wav" type="AudioStream" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "pulse"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 16 )
+
+[node name="Bomb" type="Area2D"]
+script = ExtResource( 1 )
+Explosion = ExtResource( 2 )
+
+[node name="Rotator" type="Control" parent="."]
+rect_pivot_offset = Vector2( 16, 16 )
+
+[node name="Arrow" parent="Rotator" instance=ExtResource( 3 )]
+position = Vector2( 0, -50 )
+
+[node name="Arrow2" parent="Rotator" instance=ExtResource( 3 )]
+position = Vector2( 50, 0 )
+rotation = 1.5708
+
+[node name="Arrow3" parent="Rotator" instance=ExtResource( 3 )]
+position = Vector2( 0, 50 )
+rotation = -3.14159
+
+[node name="Arrow4" parent="Rotator" instance=ExtResource( 3 )]
+position = Vector2( -50, 0 )
+rotation = -1.5708
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/pulse = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="CountdownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="PulseTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[connection signal="timeout" from="CountdownTimer" to="." method="_on_CountdownTimer_timeout"]
+[connection signal="timeout" from="PulseTimer" to="." method="_on_PulseTimer_timeout"]

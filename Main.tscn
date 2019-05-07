@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://BuffPowerup.tscn" type="PackedScene" id=4]
+[ext_resource path="res://AbilityPowerup.tscn" type="PackedScene" id=5]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+speed = 300
+gravity = 900
+jump_speed = -900
+hearts = 3
+Player = ExtResource( 2 )
+HUD = ExtResource( 3 )
+BuffPowerup = ExtResource( 4 )
+AbilityPowerup = ExtResource( 5 )
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PowerupTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]

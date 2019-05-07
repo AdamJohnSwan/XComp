@@ -1,0 +1,27 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/images/puff/Background (70ms).png" type="Texture" id=1]
+[ext_resource path="res://assets/images/puff/Frame 2 (70ms) (combine).png" type="Texture" id=2]
+[ext_resource path="res://assets/images/puff/Frame 3 (70ms) (combine).png" type="Texture" id=3]
+[ext_resource path="res://assets/images/puff/Frame 4 (70ms) (combine).png" type="Texture" id=4]
+[ext_resource path="res://assets/images/puff/Frame 5 (70ms) (combine).png" type="Texture" id=5]
+[ext_resource path="res://assets/images/puff/Frame 6 (70ms) (combine).png" type="Texture" id=6]
+[ext_resource path="res://assets/images/puff/Frame 7 (70ms) (combine).png" type="Texture" id=7]
+[ext_resource path="res://assets/images/puff/Frame 9 (70ms) (combine).png" type="Texture" id=8]
+[ext_resource path="res://assets/images/puff/Frame 8 (70ms) (combine).png" type="Texture" id=9]
+[ext_resource path="res://assets/images/puff/Frame 10 (70ms) (combine).png" type="Texture" id=10]
+[ext_resource path="res://assets/images/puff/Frame 11 (70ms) (combine).png" type="Texture" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "puff",
+"speed": 10.0
+} ]
+
+[node name="PuffSprite" type="AnimatedSprite"]
+frames = SubResource( 1 )
+animation = "puff"
+frame = 1
+

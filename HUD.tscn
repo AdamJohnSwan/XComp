@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/images/bombs/bomb.png" type="Texture" id=1]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Container" type="PanelContainer" parent="."]
+margin_right = 100.0
+margin_bottom = 51.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 93.0
+margin_bottom = 73.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer"]
+margin_right = 86.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="HeartContainer" type="HBoxContainer" parent="Container/VBoxContainer"]
+margin_top = 36.0
+margin_right = 86.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 86, 18 )
+
+[node name="Icon" type="TextureRect" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 39.0
+margin_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 1 )
+

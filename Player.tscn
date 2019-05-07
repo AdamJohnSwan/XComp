@@ -1,0 +1,95 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://DeathParticles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/anims/hurt.tres" type="Animation" id=3]
+[ext_resource path="res://assets/images/player/player_idle.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/player/player_jump.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/player/player_run1.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/player/player_run2.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/player/player_run3.png" type="Texture" id=8]
+[ext_resource path="res://PuffSprite.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+} ]
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+collision_layer = 3
+script = ExtResource( 1 )
+DeathParticles = ExtResource( 2 )
+
+[node name="HurtAnimation" type="AnimationPlayer" parent="."]
+anims/hurt = ExtResource( 3 )
+
+[node name="DeathAnimation" type="AnimationPlayer" parent="."]
+anims/death = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "idle"
+
+[node name="BodyCollision" type="CollisionPolygon2D" parent="."]
+position = Vector2( -21, -36 )
+scale = Vector2( 1.10878, 1.5089 )
+polygon = PoolVector2Array( 36.9776, 1.32547, 40, 48, -0.0802298, 48.0482, 0, 0 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AreaCollision" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( -21, -25 )
+polygon = PoolVector2Array( -2, -14, 40, -14, 48, 21, 49, 64, -3, 64 )
+
+[node name="DamageCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="JumpCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="MultiBombTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="PuffSprite" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[connection signal="animation_finished" from="DeathAnimation" to="." method="_on_DeathAnimation_animation_finished"]
+[connection signal="timeout" from="DamageCooldown" to="." method="_on_DamageCooldown_timeout"]
+[connection signal="timeout" from="MultiBombTimer" to="." method="_on_MultiBombTimer_timeout"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

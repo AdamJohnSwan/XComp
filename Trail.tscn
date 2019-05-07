@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Trail.gd" type="Script" id=1]
+
+[node name="Trail" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+width = 50.0
+texture_mode = 917512
+
