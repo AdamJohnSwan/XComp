@@ -1,7 +1,7 @@
 extends Node
 
 var players = 0
-var stage = "res://stages/Tunnel.tscn"
+var stage = "res://stages/FinalDestination.tscn"
 
 func add_player():
 	players += 1
