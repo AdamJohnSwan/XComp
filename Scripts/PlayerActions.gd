@@ -1,10 +1,10 @@
 extends Node
 
 const action = [
-['player1_jump', 'player1_left', 'player1_right', 'player1_bomb', 'player1_rotate_left', 'player1_rotate_right'],
-['player2_jump', 'player2_left', 'player2_right', 'player2_bomb', 'player2_rotate_left', 'player2_rotate_right'],
-['player3_jump', 'player3_left', 'player3_right', 'player3_bomb', 'player3_rotate_left', 'player3_rotate_right'],
-['player4_jump', 'player4_left', 'player4_right', 'player4_bomb', 'player4_rotate_left', 'player4_rotate_right'],
+['player1_jump', 'player1_left', 'player1_right', 'player1_bomb', 'player1_rotate_left', 'player1_rotate_right', 'player1_start'],
+['player2_jump', 'player2_left', 'player2_right', 'player2_bomb', 'player2_rotate_left', 'player2_rotate_right', 'player2_start'],
+['player3_jump', 'player3_left', 'player3_right', 'player3_bomb', 'player3_rotate_left', 'player3_rotate_right', 'player3_start'],
+['player4_jump', 'player4_left', 'player4_right', 'player4_bomb', 'player4_rotate_left', 'player4_rotate_right', 'player4_start']
 ]
 
 enum {IDLE, RUN, JUMP}
@@ -19,6 +19,7 @@ var right
 var select
 var rotate_left
 var rotate_right
+var start
 
 func set_actions(player_number):
 	jump = action[player_number][0]
@@ -27,6 +28,7 @@ func set_actions(player_number):
 	select = action[player_number][3]
 	rotate_left = action[player_number][4]
 	rotate_right = action[player_number][5]
+	start = action[player_number][6]
 
 func change_state(new_state):
 	state = new_state

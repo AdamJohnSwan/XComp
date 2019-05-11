@@ -4,6 +4,7 @@ export (int) var speed
 export (int) var gravity
 export (int) var jump_speed
 export (int) var hearts
+
 export (PackedScene) var Player
 export (PackedScene) var HUD
 export (PackedScene) var  BuffPowerup

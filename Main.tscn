@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BuffPowerup.tscn" type="PackedScene" id=4]
 [ext_resource path="res://AbilityPowerup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/PausePopup.gd" type="Script" id=6]
 
 [node name="Main" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 1 )
 speed = 300
 gravity = 900
@@ -20,6 +22,20 @@ AbilityPowerup = ExtResource( 5 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PausePopup" type="PopupPanel" parent="CanvasLayer"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.784314 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="CanvasLayer/PausePopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Paused"
+align = 1
+valign = 1
 
 [node name="PowerupTimer" type="Timer" parent="."]
 wait_time = 5.0
