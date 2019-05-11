@@ -30,21 +30,16 @@ script = ExtResource( 1 )
 Explosion = ExtResource( 2 )
 
 [node name="Rotator" type="Control" parent="."]
-rect_pivot_offset = Vector2( 16, 16 )
 
 [node name="Arrow" parent="Rotator" instance=ExtResource( 3 )]
-position = Vector2( 0, -50 )
 
 [node name="Arrow2" parent="Rotator" instance=ExtResource( 3 )]
-position = Vector2( 50, 0 )
 rotation = 1.5708
 
 [node name="Arrow3" parent="Rotator" instance=ExtResource( 3 )]
-position = Vector2( 0, 50 )
 rotation = -3.14159
 
 [node name="Arrow4" parent="Rotator" instance=ExtResource( 3 )]
-position = Vector2( -50, 0 )
 rotation = -1.5708
 
 [node name="Sprite" type="Sprite" parent="."]

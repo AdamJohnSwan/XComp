@@ -12,11 +12,13 @@ var player
 var main
 var rotator
 
-const abilities = ['multi', 'hurty', 'big']
+#const abilities = ['multi', 'hurty', 'big', 'pointy']
+const abilities = ['pointy']
 var multi_amount = 0
 var multi_rotator
 var scale
 var damage
+var explosion_degree_of_rotation
 
 func setup_abilities(player_var, main_var):
 	player = player_var
@@ -38,6 +40,7 @@ func handle_bomb():
 		bomb = Bomb.instance()
 		main.add_child(bomb)
 		rotator = bomb.get_node("Rotator")
+		bomb.explosion_degree_of_rotation = explosion_degree_of_rotation
 		bomb_set = false
 		bomb.explosion_scale = scale
 		bomb.damage = damage
@@ -47,8 +50,10 @@ func position_bomb():
 		if !bomb_set:
 			if player.player_actions.facing_left:
 				bomb.position = Vector2(player.position.x - (player.player_size.x / 2), player.position.y)
+				bomb.explosion_degree_of_rotation = abs(bomb.explosion_degree_of_rotation) * -1
 			else:
 				bomb.position = Vector2(player.position.x + (player.player_size.x / 2), player.position.y)
+				bomb.explosion_degree_of_rotation = abs(bomb.explosion_degree_of_rotation)
 			
 		if !bomb.is_exploding and bomb.is_countdown:
 			normalize_bomb()
@@ -82,6 +87,8 @@ func set_ability():
 		'multi':
 			multi_amount = 1
 			player.hud.get_node("Icon").set_texture(multi_texture)
+		'pointy':
+			explosion_degree_of_rotation = 60
 	if bomb:
 		bomb.explosion_scale = scale
 		bomb.damage = damage
@@ -89,5 +96,6 @@ func set_ability():
 func normalize_bomb():
 	scale = 1
 	damage = 1
+	explosion_degree_of_rotation = 90
 	if player.hud:
 		player.hud.get_node("Icon").set_texture(regular_texture)
