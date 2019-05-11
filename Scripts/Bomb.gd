@@ -8,7 +8,7 @@ var shapes
 var is_countdown
 var is_exploding
 var scale_of_explosion
-var explosion_sizer = 400
+var explosion_sizer = 200
 var explosion_scale
 var damage
 
@@ -17,10 +17,7 @@ func _ready():
 
 func _process(delta):
 	if is_exploding:
-		scale_of_explosion += explosion_sizer * delta
-		for shape in shapes:
-			shape.set_scale(Vector2(scale_of_explosion, 1))
-		if scale_of_explosion >= 150:
+		if explosion.scale_of_explosion >= 1200:
 			is_exploding = false
 			explosion.queue_free()
 
@@ -42,9 +39,7 @@ func _on_CountdownTimer_timeout():
 	explosion.set_scale(Vector2(explosion_scale, explosion_scale))
 	explosion.damage = damage
 	
-	shapes = explosion.get_children()
-	for shape in shapes:
-		shape.set_rotation($Rotator.get_rotation() + shape.get_rotation())
+	explosion.set_rotation($Rotator.get_rotation() + explosion.get_rotation())
 	main.add_child(explosion)
 	explosion.position = position
 
