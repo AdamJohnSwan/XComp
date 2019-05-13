@@ -3,6 +3,7 @@ var Bomb = preload("res://Bomb.tscn")
 var hurty_texture = preload("res://assets/images/bombs/hurty.png")
 var big_texture = preload("res://assets/images/bombs/big.png")
 var multi_texture = preload("res://assets/images/bombs/multi.png")
+var pointy_texture = preload("res://assets/images/bombs/claymore.png")
 var regular_texture = preload("res://assets/images/bombs/bomb.png")
 var bomb
 var bomb_set
@@ -89,6 +90,7 @@ func set_ability():
 			player.hud.get_node("Icon").set_texture(multi_texture)
 		'pointy':
 			explosion_degree_of_rotation = 60
+			player.hud.get_node("Icon").set_texture(pointy_texture)
 	if bomb:
 		bomb.explosion_scale = scale
 		bomb.damage = damage
