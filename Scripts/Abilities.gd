@@ -13,8 +13,7 @@ var player
 var main
 var rotator
 
-#const abilities = ['multi', 'hurty', 'big', 'pointy']
-const abilities = ['pointy']
+const abilities = ['multi', 'hurty', 'big', 'pointy']
 var multi_amount = 0
 var multi_rotator
 var scale
