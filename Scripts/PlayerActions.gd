@@ -64,6 +64,8 @@ func get_input(player):
 	if Input.is_action_just_pressed(select):
 		player.abilitiesgd.handle_bomb()
 	player.get_node("Sprite").flip_h = facing_left
+	player.get_node("Remote").flip_h = facing_left
+	player.get_node("Remote").set_offset(Vector2(60 * (int(facing_left) * -1), 0))
 	if new_anim != anim:
 		anim = new_anim
 		player.get_node("Sprite").play(anim)

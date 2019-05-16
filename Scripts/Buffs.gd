@@ -3,7 +3,7 @@ extends Node
 var Bubble = preload("res://Bubble.tscn")
 var Trail = preload("res://Trail.tscn")
 
-var buffs = ['fast', 'slow', 'bubble']
+var buffs = ['fast', 'slow', 'bubble', 'remote']
 var buff_time = 8
 
 var trail
@@ -27,6 +27,9 @@ func set_buff():
 			if !bubble:
 				bubble = Bubble.instance()
 				main.add_child(bubble)
+		'remote':
+			player.abilitiesgd.bomb_remote = true
+			player.get_node("Remote").show()
 		'fast':
 			player.speed = main.speed * 2
 			player.get_node("Sprite").set_speed_scale(2)

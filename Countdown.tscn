@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Countdown.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/old_school.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/images/countdown_swoosh.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/countdown_go.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/countdown.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/start.wav" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 120
@@ -74,7 +77,6 @@ margin_right = 1020.0
 margin_bottom = 600.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-editor/display_folded = true
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -86,7 +88,6 @@ margin_right = 1024.0
 margin_bottom = 289.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-modulate = Color( 1, 1, 1, 0 )
 margin_right = 1024.0
 margin_bottom = 173.0
 custom_fonts/font = SubResource( 1 )
@@ -95,7 +96,7 @@ align = 1
 valign = 1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.888889 )
 margin_top = 177.0
 margin_right = 1024.0
 margin_bottom = 289.0
@@ -105,3 +106,31 @@ texture = ExtResource( 3 )
 autoplay = "countdown"
 anims/countdown = SubResource( 2 )
 
+[node name="Go" type="MarginContainer" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.556863 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -214.0
+margin_top = -126.5
+margin_right = 214.0
+margin_bottom = 22.5
+
+[node name="TextureRect" type="TextureRect" parent="Go"]
+margin_right = 428.0
+margin_bottom = 149.0
+texture = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[node name="countdown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

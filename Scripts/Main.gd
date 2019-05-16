@@ -14,7 +14,7 @@ var stage = load(Globals.stage)
 var map
 var heart_texture = preload("res://assets/images/heart_full.png")
 
-var powerup_types = ['buff', 'ability']
+const powerup_types = ['ability']
 var powerup_spawner_locations
 var screen_size
 
@@ -58,9 +58,6 @@ func _ready():
 		player.hearts = hearts
 		player.hud = hud
 		index += 1
-	#connect countdown timer
-	$Countdown.connect("countdown_finished", self, "_onCountdownFinished")
-	get_tree().set_pause(true)
 
 func get_hud_position(player_number, hud_size):
 	match player_number:
@@ -72,9 +69,6 @@ func get_hud_position(player_number, hud_size):
 			return Vector2(1, screen_size.y - hud_size.y - 20)
 		3:
 			return Vector2(screen_size.x - (hud_size.x + hearts * 16), screen_size.y - hud_size.y - 20)
-
-func _onCountdownFinished():
-	$Countdown.queue_free()
 
 func _on_PowerupTimer_timeout():
 	var powerup_picker = powerup_types[randi() % powerup_types.size()]

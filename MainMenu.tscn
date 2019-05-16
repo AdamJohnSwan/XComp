@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/sounds/game_start_long.wav" type="AudioStream" id=9]
 
 [node name="MainMenu" type="TextureRect"]
+pause_mode = 2
 margin_right = 1020.0
 margin_bottom = 600.0
 texture = ExtResource( 1 )

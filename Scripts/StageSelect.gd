@@ -32,9 +32,11 @@ func _ready():
 
 
 func _on_DestinationButton_pressed():
+	$StageSelected.play()
 	Globals.set_stage("res://stages/FinalDestination.tscn")
 	SceneChanger.fade_to("res://Main.tscn")
 
 func _on_TunnelButton_pressed():
+	$StageSelected.play()
 	Globals.set_stage("res://stages/Tunnel.tscn")
 	SceneChanger.fade_to("res://Main.tscn")

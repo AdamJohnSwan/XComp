@@ -81,7 +81,7 @@ func take_damage(damage):
 			main.add_child(death_particles)
 			set_collision_mask_bit(0, false)
 			set_collision_layer_bit(0, false)
-			print($BodyCollision.disabled)
+			player_actions.change_state('idle')
 			player_dead = true
 		else:
 			$HurtAnimation.play('hurt')

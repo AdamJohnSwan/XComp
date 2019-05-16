@@ -7,13 +7,15 @@ var pointy_texture = preload("res://assets/images/bombs/claymore.png")
 var regular_texture = preload("res://assets/images/bombs/bomb.png")
 var bomb
 var bomb_set
+var bomb_remote = false
 var ability
 var bomb_texture
 var player
 var main
 var rotator
 
-const abilities = ['multi', 'hurty', 'big', 'pointy']
+#const abilities = ['multi', 'hurty', 'big', 'pointy']
+const abilities = ['big', 'pointy']
 var multi_amount = 0
 var multi_rotator
 var scale
@@ -61,8 +63,9 @@ func position_bomb():
 			bomb = null
 
 func rotate_bomb(direction):
-	if !bomb_set and bomb:
-		rotator.set_rotation(rotator.get_rotation() + direction)
+	if bomb:
+		if !bomb_set or bomb_remote:
+			rotator.set_rotation(rotator.get_rotation() + direction)
 
 func set_multi_bomb():
 		var multi_bomb = Bomb.instance()
@@ -97,6 +100,8 @@ func set_ability():
 func normalize_bomb():
 	scale = 1
 	damage = 1
+	bomb_remote = false
+	player.get_node("Remote").hide()
 	explosion_degree_of_rotation = 90
 	if player.hud:
 		player.hud.get_node("Icon").set_texture(regular_texture)
