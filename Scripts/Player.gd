@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal off_screen
+signal player_dead
 
 export (PackedScene) var DeathParticles
 
@@ -35,10 +36,11 @@ func _ready():
 	buffsgd.setup_buffs(self, main)
 	$Sprite.set_modulate(color)
 	connect("off_screen", main, "_on_Player_off_screen", [self])
+	connect("player_dead", main, "_on_Player_dead")
 
-func get_actions(player_number):
+func get_actions(number):
 	player_actions = PlayerActions.new()
-	player_actions.set_actions(player_number)
+	player_actions.set_actions(number)
 
 func _process(delta):
 	if player_dead:
@@ -66,7 +68,7 @@ func take_damage(damage):
 		if velocity.y != 0:
 			velocity.y *= -1
 		else:
-			velocity.y += jump_speed /2
+			velocity.y += jump_speed / 2
 		velocity.y = (abs(velocity.y) + jump_speed) * (velocity.normalized().y * -1)
 		velocity.x = (abs(velocity.x) + main.speed * 25) * (velocity.normalized().x * -1)
 		can_take_damage = false
@@ -75,6 +77,7 @@ func take_damage(damage):
 			damage -= 1
 			hearts -= 1
 		if hearts == 0:
+			emit_signal("player_dead")
 			$DeathAnimation.play("death")
 			death_particles = DeathParticles.instance()
 			death_particles.set_modulate(color)

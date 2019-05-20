@@ -14,7 +14,7 @@ script = ExtResource( 1 )
 speed = 300
 gravity = 900
 jump_speed = -900
-hearts = 3
+hearts = 1
 Player = ExtResource( 2 )
 HUD = ExtResource( 3 )
 BuffPowerup = ExtResource( 4 )
@@ -43,10 +43,15 @@ align = 1
 valign = 1
 
 [node name="PowerupTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 20.0
 one_shot = true
 autostart = true
 
 [node name="Countdown" parent="." instance=ExtResource( 7 )]
 
+[node name="EndgameSlowdown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]
+[connection signal="timeout" from="EndgameSlowdown" to="." method="_on_EndgameSlowdown_timeout"]

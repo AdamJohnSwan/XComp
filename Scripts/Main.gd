@@ -17,12 +17,14 @@ var heart_texture = preload("res://assets/images/heart_full.png")
 const powerup_types = ['ability']
 var powerup_spawner_locations
 var screen_size
+var players_left
 
 func _ready():
 	map = stage.instance()
 	add_child(map)
 	powerup_spawner_locations = map.get_node("PowerupSpawnerLocations").get_children()
-	Globals.players = 1
+	Globals.players = 2
+	players_left = Globals.players
 	screen_size = get_viewport_rect().size
 	var player_count = Globals.players
 	var index = 0
@@ -31,21 +33,13 @@ func _ready():
 		#set the players screen_size relative to camera zoom
 		player.screen_size = screen_size * map.get_node("Camera2D").zoom
 		#set player colors
-		match index:
-			0:
-				player.color = Color(255,0,0)
-			1:
-				player.color = Color(0,0,255)
-			2:
-				player.color = Color(0,255,0)
-			3:
-				player.color = Color(255,255,0)
+		player.color = Globals.colors[index]
 		player.speed = speed
 		player.jump_speed = jump_speed
 		player.gravity = gravity
 		player.get_actions(index)
 		player.position = map.get_node('StartingPositions').get_children()[index].position
-		add_child(player)
+		$Players.add_child(player)
 		var hud = HUD.instance()
 		for heart in hearts:
 			var heart_image = TextureRect.new()
@@ -83,7 +77,7 @@ func _on_PowerupTimer_timeout():
 	location.get_node("PowerupLocation").set_offset(randi())
 	powerup.position = location.get_node("PowerupLocation").position
 	powerup.get_node('PuffSprite').play('puff')
-	#$PowerupTimer.set_wait_time(randi() % 30 + 10)
+	$PowerupTimer.set_wait_time(randi() % 30 + 10)
 	$PowerupTimer.start()
 
 func _on_Player_off_screen(player):
@@ -97,3 +91,23 @@ func _on_Player_off_screen(player):
 		var location = powerup_spawner_locations[randi() % powerup_spawner_locations.size()]
 		location.get_node("PowerupLocation").set_offset(randi())
 		player.position = location.get_node("PowerupLocation").position
+		
+func _on_Player_dead():
+	if Globals.players == 1:
+		Engine.set_time_scale(0.4)
+		$EndgameSlowdown.start()
+	else:
+		players_left -= 1
+		if players_left == 1:
+			Engine.set_time_scale(0.4)
+			$EndgameSlowdown.start()
+
+func _on_EndgameSlowdown_timeout():
+	Engine.set_time_scale(1.0)
+	#find the winner
+	var index = 0
+	for player in $Players.get_children():
+		if !player.player_dead:
+			Globals.winner = index
+		index += 1
+	SceneChanger.fade_to("res://Results.tscn")
