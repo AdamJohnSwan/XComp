@@ -14,7 +14,7 @@ var stage = load(Globals.stage)
 var map
 var heart_texture = preload("res://assets/images/heart_full.png")
 
-const powerup_types = ['ability']
+const powerup_types = ['ability', 'buff']
 var powerup_spawner_locations
 var screen_size
 var players_left

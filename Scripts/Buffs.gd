@@ -27,12 +27,15 @@ func set_buff():
 			if !bubble:
 				bubble = Bubble.instance()
 				main.add_child(bubble)
+				main.get_node("bubble_sound").play()
 		'remote':
 			player.abilitiesgd.bomb_remote = true
 			player.get_node("Remote").show()
+			main.get_node("remote_sound").play()
 		'fast':
 			player.speed = main.speed * 2
 			player.get_node("Sprite").set_speed_scale(2)
+			main.get_node("fast_sound").play()
 			if !trail:
 				trail = Trail.instance()
 				trail.set_trail(player, player.color)
@@ -45,6 +48,7 @@ func set_buff():
 		'slow':
 			player.speed = main.speed / 2
 			player.get_node("Sprite").set_speed_scale(0.5)
+			main.get_node("slow_sound").play()
 			if speed_timer:
 				if trail:
 					trail.get_node("Line2D").hide()

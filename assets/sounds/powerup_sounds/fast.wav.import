@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fast.wav-a042f60c9a245157ce5cf5a6cdb2693c.sample"
+
+[deps]
+
+source_file="res://assets/sounds/powerup_sounds/fast.wav"
+dest_files=[ "res://.import/fast.wav-a042f60c9a245157ce5cf5a6cdb2693c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

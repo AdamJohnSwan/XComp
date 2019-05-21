@@ -1,10 +1,13 @@
 extends Node
+
 var Bomb = preload("res://Bomb.tscn")
+
 var hurty_texture = preload("res://assets/images/bombs/hurty.png")
 var big_texture = preload("res://assets/images/bombs/big.png")
 var multi_texture = preload("res://assets/images/bombs/multi.png")
 var pointy_texture = preload("res://assets/images/bombs/claymore.png")
 var regular_texture = preload("res://assets/images/bombs/bomb.png")
+
 var bomb
 var bomb_set
 var bomb_remote = false
@@ -14,8 +17,7 @@ var player
 var main
 var rotator
 
-#const abilities = ['multi', 'hurty', 'big', 'pointy']
-const abilities = ['big', 'pointy']
+const abilities = ['multi', 'hurty', 'big', 'pointy']
 var multi_amount = 0
 var multi_rotator
 var scale
@@ -84,15 +86,19 @@ func set_ability():
 		'big':
 			scale = 3
 			player.hud.get_node("Icon").set_texture(big_texture)
+			main.get_node("big_sound").play()
 		'hurty':
 			damage = 2
 			player.hud.get_node("Icon").set_texture(hurty_texture)
+			main.get_node("hurty_sound").play()
 		'multi':
 			multi_amount = 1
 			player.hud.get_node("Icon").set_texture(multi_texture)
+			main.get_node("multi_sound").play()
 		'pointy':
 			explosion_degree_of_rotation = 60
 			player.hud.get_node("Icon").set_texture(pointy_texture)
+			main.get_node("pointy_sound").play()
 	if bomb:
 		bomb.explosion_scale = scale
 		bomb.damage = damage

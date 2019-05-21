@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,14 @@
 [ext_resource path="res://AbilityPowerup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/PausePopup.gd" type="Script" id=6]
 [ext_resource path="res://Countdown.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sounds/powerup_sounds/hurty.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/powerup_sounds/big.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/powerup_sounds/multi.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/powerup_sounds/pointy.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/powerup_sounds/fast.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/powerup_sounds/slow.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/powerup_sounds/bubble.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/powerup_sounds/remote.wav" type="AudioStream" id=15]
 
 [node name="Main" type="Node2D"]
 pause_mode = 1
@@ -52,6 +60,31 @@ autostart = true
 [node name="EndgameSlowdown" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="hurty_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+
+[node name="big_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+
+[node name="multi_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+
+[node name="pointy_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+
+[node name="fast_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+
+[node name="slow_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+
+[node name="bubble_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+attenuation = 0.90125
+
+[node name="remote_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
 
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]
 [connection signal="timeout" from="EndgameSlowdown" to="." method="_on_EndgameSlowdown_timeout"]
