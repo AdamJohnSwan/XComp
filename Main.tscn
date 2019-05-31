@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/sounds/powerup_sounds/slow.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/powerup_sounds/bubble.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/powerup_sounds/remote.wav" type="AudioStream" id=15]
+[ext_resource path="res://Background.tscn" type="PackedScene" id=16]
 
 [node name="Main" type="Node2D"]
 pause_mode = 1
@@ -85,6 +86,8 @@ attenuation = 0.90125
 
 [node name="remote_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 15 )
+
+[node name="Background" parent="." instance=ExtResource( 16 )]
 
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]
 [connection signal="timeout" from="EndgameSlowdown" to="." method="_on_EndgameSlowdown_timeout"]
