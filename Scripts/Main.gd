@@ -101,6 +101,8 @@ func _on_Player_dead():
 		if players_left == 1:
 			Engine.set_time_scale(0.4)
 			$EndgameSlowdown.start()
+			$MusicBox.fade_out()
+			
 
 func _on_EndgameSlowdown_timeout():
 	Engine.set_time_scale(1.0)

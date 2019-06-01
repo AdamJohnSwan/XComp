@@ -1,18 +1,19 @@
 extends CanvasLayer
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var type
+var shader_amount = 4
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	$Shader.material.set_shader_param("type", 1)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-func start_switcher():
-	$CanvasLayer/Switcher/AnimationPlayer.play("fade")
+	randomize()
+	type = randi() % shader_amount + 1
+	$Shader.material.set_shader_param("type", type)
 
 func change_shader():
-	pass
+	var new_type = type
+	while new_type == type:
+		new_type = randi() % shader_amount + 1
+	type = new_type
+	$Shader.material.set_shader_param("type", type)
+
+func start_switching():
+	$Switcher/AnimationPlayer.play("fade")
