@@ -21,9 +21,10 @@ var players_left
 
 func _ready():
 	map = stage.instance()
+	if Globals.players == 0:
+		Globals.players = 2
 	add_child(map)
 	powerup_spawner_locations = map.get_node("PowerupSpawnerLocations").get_children()
-	Globals.players = 2
 	players_left = Globals.players
 	screen_size = get_viewport_rect().size
 	var player_count = Globals.players
