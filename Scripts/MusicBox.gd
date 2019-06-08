@@ -2,7 +2,7 @@ extends Control
 
 onready var tween_out = get_node("Tween")
 
-var music_dir = "res:///assets/music/"
+var music_dir = "res://assets/music/"
 var transition_duration = 3.00
 var transition_type = 1
 
@@ -14,14 +14,15 @@ func _ready():
 	var tracks = []
 	
 	dir.open(music_dir)
-	dir.list_dir_begin()
+	dir.list_dir_begin(false)
 	
 	while true:
 		var file = dir.get_next()
 		if file == "":
 			break
-		elif file.ends_with(".ogg"):
-			tracks.append(file)
+		elif file.ends_with(".import"):
+			var new_file = file.replace(".import", "")
+			tracks.append(new_file)
 	
 	var music_file = randi() % tracks.size()
 	var music = load(music_dir + tracks[music_file])
