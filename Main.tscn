@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://assets/sounds/powerup_sounds/remote.wav" type="AudioStream" id=15]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scripts/MusicBox.gd" type="Script" id=17]
-[ext_resource path="res://assets/music/Main Loop (with voice effect)_wav.wav" type="AudioStream" id=18]
 
 [node name="Main" type="Node2D"]
 pause_mode = 1
@@ -97,7 +96,6 @@ margin_bottom = 40.0
 script = ExtResource( 17 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="MusicBox"]
-stream = ExtResource( 18 )
 autoplay = true
 
 [node name="Tween" type="Tween" parent="MusicBox"]

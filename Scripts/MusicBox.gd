@@ -2,7 +2,7 @@ extends Control
 
 onready var tween_out = get_node("Tween")
 
-var music_dir = "res://assets/music/"
+var music_dir = "res:///assets/music/"
 var transition_duration = 3.00
 var transition_type = 1
 
@@ -27,6 +27,7 @@ func _ready():
 	var music = load(music_dir + tracks[music_file])
 	music.set_loop(true)
 	$AudioStreamPlayer.set_stream(music)
+	$AudioStreamPlayer.play()
 	pass
 
 func fade_out():
