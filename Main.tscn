@@ -1,22 +1,23 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BuffPowerup.tscn" type="PackedScene" id=4]
 [ext_resource path="res://AbilityPowerup.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/PausePopup.gd" type="Script" id=6]
-[ext_resource path="res://Countdown.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/sounds/powerup_sounds/hurty.wav" type="AudioStream" id=8]
-[ext_resource path="res://assets/sounds/powerup_sounds/big.wav" type="AudioStream" id=9]
-[ext_resource path="res://assets/sounds/powerup_sounds/multi.wav" type="AudioStream" id=10]
-[ext_resource path="res://assets/sounds/powerup_sounds/pointy.wav" type="AudioStream" id=11]
-[ext_resource path="res://assets/sounds/powerup_sounds/fast.wav" type="AudioStream" id=12]
-[ext_resource path="res://assets/sounds/powerup_sounds/slow.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/sounds/powerup_sounds/bubble.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/sounds/powerup_sounds/remote.wav" type="AudioStream" id=15]
-[ext_resource path="res://Background.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scripts/MusicBox.gd" type="Script" id=17]
+[ext_resource path="res://StagePowerup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/PausePopup.gd" type="Script" id=7]
+[ext_resource path="res://Countdown.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/sounds/powerup_sounds/hurty.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/powerup_sounds/big.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/powerup_sounds/multi.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/powerup_sounds/pointy.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/powerup_sounds/fast.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/powerup_sounds/slow.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/powerup_sounds/bubble.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/powerup_sounds/remote.wav" type="AudioStream" id=16]
+[ext_resource path="res://Background.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scripts/MusicBox.gd" type="Script" id=18]
 
 [node name="Main" type="Node2D"]
 pause_mode = 1
@@ -29,6 +30,7 @@ Player = ExtResource( 2 )
 HUD = ExtResource( 3 )
 BuffPowerup = ExtResource( 4 )
 AbilityPowerup = ExtResource( 5 )
+StagePowerup = ExtResource( 6 )
 
 [node name="Players" type="Node2D" parent="."]
 
@@ -39,7 +41,7 @@ pause_mode = 2
 modulate = Color( 1, 1, 1, 0.784314 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="CanvasLayer/PausePopup"]
 anchor_right = 1.0
@@ -57,48 +59,51 @@ wait_time = 20.0
 one_shot = true
 autostart = true
 
-[node name="Countdown" parent="." instance=ExtResource( 7 )]
+[node name="Countdown" parent="." instance=ExtResource( 8 )]
 
 [node name="EndgameSlowdown" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
 [node name="hurty_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 8 )
-
-[node name="big_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
 
-[node name="multi_sound" type="AudioStreamPlayer2D" parent="."]
+[node name="big_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 10 )
 
-[node name="pointy_sound" type="AudioStreamPlayer2D" parent="."]
+[node name="multi_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 11 )
 
-[node name="fast_sound" type="AudioStreamPlayer2D" parent="."]
+[node name="pointy_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )
 
-[node name="slow_sound" type="AudioStreamPlayer2D" parent="."]
+[node name="fast_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
 
-[node name="bubble_sound" type="AudioStreamPlayer2D" parent="."]
+[node name="slow_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 14 )
+
+[node name="bubble_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
 attenuation = 0.90125
 
 [node name="remote_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 15 )
+stream = ExtResource( 16 )
 
-[node name="Background" parent="." instance=ExtResource( 16 )]
+[node name="Background" parent="." instance=ExtResource( 17 )]
 
 [node name="MusicBox" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="MusicBox"]
 autoplay = true
 
 [node name="Tween" type="Tween" parent="MusicBox"]
+
+[node name="StagePowerup" parent="." instance=ExtResource( 6 )]
+position = Vector2( 560, 230 )
 
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_PowerupTimer_timeout"]
 [connection signal="timeout" from="EndgameSlowdown" to="." method="_on_EndgameSlowdown_timeout"]

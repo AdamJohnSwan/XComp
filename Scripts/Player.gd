@@ -8,7 +8,6 @@ export (PackedScene) var DeathParticles
 var PlayerActions = preload("res://Scripts/PlayerActions.gd")
 var Abilities = preload("res://Scripts/Abilities.gd")
 var Buffs = preload("res://Scripts/Buffs.gd")
-var StageP = preload("res://Scripts/StageP.gd")
 
 var player_dead = false
 var death_particles
@@ -25,7 +24,6 @@ var screen_size
 var hearts
 var abilitiesgd
 var buffsgd
-var stagegd
 var color
 
 func _ready():
@@ -34,10 +32,8 @@ func _ready():
 	$BodyCollision.disabled = false
 	abilitiesgd = Abilities.new()
 	buffsgd = Buffs.new()
-	stagegd = StageP.new()
 	abilitiesgd.setup_abilities(self, main)
 	buffsgd.setup_buffs(self, main)
-	stagegd.setup_stagep(self, main)
 	$Sprite.set_modulate(color)
 	connect("off_screen", main, "_on_Player_off_screen", [self])
 	connect("player_dead", main, "_on_Player_dead")
@@ -110,9 +106,6 @@ func get_ability_powerup():
 
 func get_buff_powerup():
 	buffsgd.get_powerup()
-
-func get_stage_powerup():
-	stagegd.get_powerup()
 
 func _on_DeathAnimation_animation_finished(anim_name):
 		if anim_name == "death":

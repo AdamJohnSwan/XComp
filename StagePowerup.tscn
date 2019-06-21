@@ -10,7 +10,7 @@ var power_grabbed = false
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group(\"Player\") and body.player_dead == false and !power_grabbed:
-		body.get_stage_powerup()
+		get_tree().get_root().get_node(\"Main\").get_stage_powerup()
 		$Bottom.hide()
 		$Sprite.hide()
 		power_grabbed = true

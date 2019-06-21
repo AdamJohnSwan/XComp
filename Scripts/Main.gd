@@ -9,21 +9,27 @@ export (PackedScene) var Player
 export (PackedScene) var HUD
 export (PackedScene) var  BuffPowerup
 export (PackedScene) var  AbilityPowerup
+export (PackedScene) var  StagePowerup
 
 var stage = load(Globals.stage)
 var map
 var heart_texture = preload("res://assets/images/heart_full.png")
+var StageP = preload("res://Scripts/StageP.gd")
 
-const powerup_types = ['ability', 'buff']
+#const powerup_types = ['ability', 'buff', 'stage']
+const powerup_types = ['stage']
 var powerup_spawner_locations
+var stagegd
 var screen_size
 var players_left
 
 func _ready():
 	map = stage.instance()
 	if Globals.players == 0:
-		Globals.players = 2
+		Globals.players = 1
 	add_child(map)
+	stagegd = StageP.new()
+	stagegd.setup_stagep(self)
 	powerup_spawner_locations = map.get_node("PowerupSpawnerLocations").get_children()
 	players_left = Globals.players
 	screen_size = get_viewport_rect().size
@@ -65,6 +71,9 @@ func get_hud_position(player_number, hud_size):
 		3:
 			return Vector2(screen_size.x - (hud_size.x + hearts * 16), screen_size.y - hud_size.y - 20)
 
+func get_stage_powerup():
+	stagegd.get_powerup()
+
 func _on_PowerupTimer_timeout():
 	var powerup_picker = powerup_types[randi() % powerup_types.size()]
 	var powerup
@@ -73,6 +82,8 @@ func _on_PowerupTimer_timeout():
 			powerup = AbilityPowerup.instance()
 		'buff':
 			powerup = BuffPowerup.instance()
+		'stage':
+			powerup = StagePowerup.instance()
 	add_child(powerup)
 	var location = powerup_spawner_locations[randi() % powerup_spawner_locations.size()]
 	location.get_node("PowerupLocation").set_offset(randi())
